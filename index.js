@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('./config/config');
 const userRoutes = require('./Routes/userRoutes');
-// const doctorsRoutes = require('./Routes/doctorsRoutes');
+const doctorRoutes = require('./Routes/doctorRoutes');
 const dotenv = require('dotenv');
+const authMiddleware = require('./Middlewares/authMiddleware');
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ mongoose.connect(config.mongoURL)
 app.use(express.json());
 
 app.use('/user', userRoutes);
-// app.use('/doctors', doctorsRoutes);
+app.use('/doctors', authMiddleware.verfiyToken, doctorRoutes);
 
 //Start the server
 const PORT = process.env.PORT || 4000;
