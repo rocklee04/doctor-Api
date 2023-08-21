@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
-const config = require('../config/config');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 
 function verfiyToken(req, res, next) {
@@ -9,7 +11,7 @@ function verfiyToken(req, res, next) {
         return res.status(401).json({message:'No token provided'});
     }
 
-    jwt.verify(token, config.jwtSecret, (err, decoded) => {
+    jwt.verify(token, process.env.jwtSecret, (err, decoded) => {
         if(err) {
             return res.status(403).json({message: 'Failed to authenticate token'});
         }

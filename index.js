@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const config = require('./config/config');
 const userRoutes = require('./Routes/userRoutes');
 const doctorRoutes = require('./Routes/doctorRoutes');
 const dotenv = require('dotenv');
@@ -11,7 +10,7 @@ dotenv.config();
 const app = express();
 
 //connect to db
-mongoose.connect(config.mongoURL)
+mongoose.connect(process.env.mongoURL)
 .then(() => {
     console.log('Connected To DB')
 }).catch((error) => {
