@@ -4,11 +4,13 @@ const userRoutes = require('./Routes/userRoutes');
 const doctorRoutes = require('./Routes/doctorRoutes');
 const dotenv = require('dotenv');
 const authMiddleware = require('./Middlewares/authMiddleware');
+const cors = require('cors');
+
 
 dotenv.config();
 
 const app = express();
-
+app.use(cors());
 //connect to db
 mongoose.connect(process.env.mongoURL)
 .then(() => {
